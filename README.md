@@ -1,6 +1,6 @@
 <h1 align="center"> Ceci </h1>
 
-> Status do Projeto: Em desenvolvimento :construction:
+> Status do Projeto: Concluído :heavy_check_mark:
 
 ## Descrição do Projeto
 <p align="justify"> O projeto Ceci é um projeto que possui arquitetura e funcionalidade básicas para o início de novos projetos. </p>
@@ -15,6 +15,7 @@
       * [Criando banco de dados com o Code First](#criando-banco-de-dados-com-o-code-first)
       * [Rodando a aplicação](#rodando-a-aplicação)
       * [Executando os testes](#executando-os-testes)
+   * [Publicação da API no Heroku](#publicação-da-api-no-heroku-rocket)
    * [Referências](#referências-newspaper)
 <!--te-->
 
@@ -30,27 +31,27 @@
 
 ## O que as funcionalidades do projeto é capaz de fazer :computer:
 
-:white_check_mark: Manter autenticação do usuário com base nos dados cadastrados, perfil e geração de token JWT 
+:dart: Manter autenticação do usuário com base nos dados cadastrados, perfil e geração de token JWT 
 
-:white_check_mark: Atualizar token de autenticação do usuário
+:dart: Atualizar token de autenticação do usuário
 
-:white_check_mark: Recuperar senha do usuário
+:dart: Recuperar senha do usuário
 
-:white_check_mark: Redefinir senha do usuário
+:dart: Redefinir senha do usuário
 
-:white_check_mark: Validar cadastro de novos usuários com a confirmação de um código enviado por email
+:dart: Validar cadastro de novos usuários com a confirmação de um código enviado por email
 
-:white_check_mark: Manter cadastro de usuários 
+:dart: Manter cadastro de usuários 
 
-:white_check_mark: Manter perfis de usuários 
+:dart: Manter perfis de usuários 
 
-:white_check_mark: Vincular perfis a usuários 
+:dart: Vincular perfis a usuários 
 
-:white_check_mark: Execução de serviço em background (envio de emails e importação de relatórios)
+:dart: Execução de serviço em background (envio de emails e importação de relatórios)
 
-:white_check_mark: Importação de dados de arquivo Excel para a base de dados
+:dart: Importação de dados de arquivo Excel para a base de dados
 
-:white_check_mark: Geração de relatórios em excel com base em filtros enviados na requisição
+:dart: Geração de relatórios em excel com base em filtros enviados na requisição
 
 ## Linguagens, libs e tecnologias utilizadas :books:
 
@@ -265,6 +266,14 @@ PS ...\Ceci\Ceci.Test> dotnet test
 
 O resultado dos testes aparecerá no console.
 
+## Publicação da API no Heroku :rocket:
+
+A Heroku é uma plataforma em nuvem que permite que as empresas criem, entreguem, monitorem e dimensionem aplicativos. A plataforma possui um plano gratuito para aplicativos não comerciais, como prova de conceito, MVP e projetos pessoais, ou seja, é uma excelente ferramente para testar a nossa API. 
+
+A publicação na plataforma Heroku foi realizada com base no artigo [Deploy de uma aplicação .NET Core 3.0 + Docker no Heroku](https://medium.com/@lorranpalmeira/deploy-de-uma-aplica%C3%A7%C3%A3o-net-core-3-0-docker-no-heroku-481c21f8d3c5), que é bem prático e objetivo, do autor [Lorran, C# Developer](https://medium.com/@lorranpalmeira). Apesar de no artigo ser utilizado como base uma versão 3.0 .NET Core, o conteúdo pode ser utilizado para a publicação da versão 6.0 .NET Core.
+
+O arquivo "DockerFile", já está contemplado nessa versão e está disponível na raiz da solução, em alguns casos o arquivo é armazenado na raiz do projeto WebApplication, mais como o projeto Ceci possui mais de um projeto na solução e são dependências de projetos, a publicação no Heroku só foi concluída com essa organização. Vale ressaltar que essa foi uma configuração na qual foi possível publicar o projeto Ceci no Heroku, não necessáriamente é uma regra para o caminho do arquivo "DockerFile".
+
 ## Referências :newspaper:
 
 Os seguintes artigos, documentações e exemplos foram utilizados como material de apoio para a implementação do projeto:
@@ -317,6 +326,10 @@ Os seguintes artigos, documentações e exemplos foram utilizados como material 
 ### Importação e manipulação de arquivos
 
 - https://closedxml.readthedocs.io/en/latest/simpleWorkbookExample.html#creating-a-workbook
+
+### Publicação Heroku e Docker
+
+- https://medium.com/@lorranpalmeira/deploy-de-uma-aplica%C3%A7%C3%A3o-net-core-3-0-docker-no-heroku-481c21f8d3c5
 
 ### Documentação
 
