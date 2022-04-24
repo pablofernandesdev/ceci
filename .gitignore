@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 /Ceci/.vscode
 /Ceci/Ceci.Test/.vscode
+/Ceci/Ceci.WebApplication/appsettings.Production.json

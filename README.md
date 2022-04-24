@@ -48,29 +48,29 @@
 
 :white_check_mark: Execução de serviço em background (envio de emails e importação de relatórios)
 
-:white_check_mark: Importação de dados de arquivo Execel para a base de dados
+:white_check_mark: Importação de dados de arquivo Excel para a base de dados
 
 :white_check_mark: Geração de relatórios em excel com base em filtros enviados na requisição
 
 ## Linguagens, libs e tecnologias utilizadas :books:
 
-- [.NET Core](https://dotnet.microsoft.com/en-us/download/dotnet/5.0): versão 5.0
+- [.NET Core](https://dotnet.microsoft.com/en-us/download/dotnet/6.0): versão 6.0
     - Plataforma de desenvolvimento gratuita e de software livre para a criação de muitos tipos de aplicativos.
 - [C#](https://docs.microsoft.com/pt-br/dotnet/csharp/): versão 8.0
     - Linguagem de programação moderna, orientada a objeto e fortemente digitada.
 - [Hangfire](https://www.hangfire.io/): versão 1.7
     - Biblioteca que permite realizar o processamento em segundo plano em aplicativos .NET e .NET Core.
-- [Bogus](https://github.com/bchavez/Bogus): versão 33.1
+- [Bogus](https://github.com/bchavez/Bogus): versão 34.0.2
     - Gerador de dados falsos simples e lógico para linguagens .NET como C # , F # e VB.NET . 
-- [Moq](https://github.com/moq): versão 4.16
+- [Moq](https://github.com/moq): versão 4.17.2
     - Biblioteca de simulação para .NET 
-- [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore): versão 6.1.4
+- [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore): versão 6.3.1
     - Conjunto de ferramentas Swagger para APIs criadas com ASP.NET Core. Gere uma bela documentação de API, incluindo uma IU para explorar e testar operações, diretamente de suas rotas, controladores e modelos.
-- [AutoMapper](https://github.com/AutoMapper/AutoMapper): versão 10.1.1
+- [AutoMapper](https://github.com/AutoMapper/AutoMapper): versão 11.0.1
     - Um mapeador de objeto-objeto baseado em convenção em .NET.
-- [FluentValidation](https://fluentvalidation.net/): versão 10.2.3
+- [FluentValidation](https://fluentvalidation.net/): versão 10.4.0
     - Biblioteca de validação para .NET que usa uma interface fluente e expressões lambda para construir regras de validação fortemente tipadas.
-- [MySql.EntityFrameworkCore](https://www.nuget.org/packages/MySql.EntityFrameworkCore/): versão 3.1.10
+- [MySql.EntityFrameworkCore](https://www.nuget.org/packages/MySql.EntityFrameworkCore/): versão 6.0.4
     - Mapeador moderno de banco de dados de objeto para .NET. Ele dá suporte a consultas LINQ, controle de alterações, atualizações e migrações de esquema em banco de dados MySql.
 - [ClosedXML](https://github.com/ClosedXML/ClosedXML): versão 0.95.4
     - ClosedXML é uma biblioteca .NET para leitura, manipulação e gravação de arquivos Excel 2007+ (.xlsx, .xlsm). Ele visa fornecer uma interface intuitiva e amigável para lidar com a API OpenXML subjacente.
@@ -84,6 +84,52 @@ No terminal, clone o projeto:
 ```
 git clone https://github.com/pablofsilva91/ceci.git
 ```
+
+### Configurações do aplicativo
+
+Antes de rodar a aplicação, é necessário definir os valores no arquivo de configuração do projeto WebApplication. Navegue até a raiz do projeto e acesse o arquivo "appSettings.Development.json" e adicione os valores para as chaves. Os valores apresentados dentro de colchetes ([]) são os valores que devem ser alterados: 
+
+```
+"Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information",
+      "Hangfire": "Information"
+    }
+  },
+"AllowedHosts": "*",
+"ConnectionStrings": {
+    "CeciDatabase": "server=[NOME-SERVER-BANCO];uid=[NOME-USUARIO-BANCO];pwd=[SENHA-USUARIO-BANCO];database=[NOME-BANCO];persistsecurityinfo=True;Allow User Variables=True",
+    "HangfireDb": "server=[NOME-SERVER-BANCO];uid=[NOME-USUARIO-BANCO];pwd=[SENHA-USUARIO-BANCO];database=[NOME-BANCO];persistsecurityinfo=True;Allow User Variables=True"
+  },  
+"JwtToken": {
+    "Secret": "[SECRET-KEY-JWT-TOKEN]"//Chave secreta para a geração e validação do token jwt
+  },
+"SwaggerSettings": {
+    "SwaggerUserAuthorized": "[SWAGGER-USUARIO-AUTORIZADO]",
+    "SwaggerAuthorizedPassword": "[SWAGGER-SENHA-USUARIO-AUTORIZADO]"
+  },
+"EmailSettings": {
+    "Mail": "[ENDERECO-EMAIL-PARA-ENVIO]",
+    "DisplayName": "[NOME-REMETENTE]",
+    "Password": "[SENHA-EMAIL]",
+    "Host": "[HOST]", //Exemplo: "smtp.office365.com"
+    "Port": [PORTA]
+  },
+"RoleSettings": {
+    "BasicRoleName": "basic"
+  },
+"HangfireSettings": {
+    "HangfireUserAuthorized": "[HANGFIRE-USUARIO-AUTORIZADO]",
+    "HangfireAuthorizedPassword": "[HANGFIRE-SENHA-USUARIO-AUTORIZADO]"
+  }
+```
+O valor para a chave "BasicRoleName" contida na seção "RoleSettings" deve ser o nome do perfil que será utilizado como "Básico" ou o perfil com nível mais baixo. Para o correto funcionamento da versão atual o valor para a chave está definida como "basic".
+
+Os valores para as chaves apresentadas na seção "ExternalProviders" são para utilização dos serviços do SendGrid e Firebase e os seus valores são obtidos no momento do cadastro desses serviços. Vale ressaltar que a implementação desses serviços externos estão incluídos nessa API, porém não são utilizados.
+
+### Build
 
 Após clonado, navegue até a raiz do projeto e execute o comando "dotnet build" para compilar o projeto e suas dependências:
 
@@ -104,7 +150,7 @@ Para a execução dos comandos as configurações do banco de dados devem ser de
   }
 ```
 
-Com o banco de dados criado e as configurações definidas, pode ser utilizado no terminal os comando para adicionar a migração inicial das classes de entidades.
+Com o banco de dados criado e as configurações definidas, pode ser utilizado no terminal o comando para adicionar a migração inicial das classes de entidades.
 O projeto já possui a migração inicial realizada, então existem duas formas de criar as tabelas no banco de dados para esse projeto:
 
 1. Criando tabelas com a migração inicial do projeto
@@ -116,7 +162,7 @@ O projeto já possui a migração inicial realizada, então existem duas formas 
     dotnet ef database update --project Ceci.Infra.Data --startup-project Ceci.WebApplication
     ```
 
-    Além de criar o modelo de dados, essa migração inicial também irá criar os registros de perfil (basic e administrator) e um usuário vinculado ao perfil "administrator". O perfil desse usuário dará permissão para acesso a funcionalidades que exigem esse perfil, uma vez que para acesso a controllers que pussuem a política "Administrator" faz-se necessário que o usuário tenha perfil "administrator".
+    Além de criar o modelo de dados, essa migração inicial também irá criar os registros de perfil (basic e administrator) e um usuário vinculado ao perfil "administrator". O perfil desse usuário dará permissão para acesso a funcionalidades que exigem esse perfil, uma vez que para acesso a controllers que possuem a política "Administrator" faz-se necessário que o usuário tenha perfil "administrator".
 
     As senhas dos usuários devem ser convertidas para o formato base64 que é necessário para a realização da criptografia. É realizado uma criptografia da senha antes do armazenamento do registro e também a descriptografia no momento da validação do usuário, ou seja, tanto para o cadastro quanto para o login na aplicação, a senha deve ser convertida para base64 antes do envio.
 
