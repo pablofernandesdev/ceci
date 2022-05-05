@@ -90,46 +90,84 @@ git clone https://github.com/pablofsilva91/ceci.git
 
 Antes de rodar a aplicação, é necessário definir os valores no arquivo de configuração do projeto WebApplication. Navegue até a raiz do projeto e acesse o arquivo "appSettings.Development.json" e adicione os valores para as chaves. Os valores apresentados dentro de colchetes ([]) são os valores que devem ser alterados: 
 
+**Banco de dados**
+
+Nessa seção, deve ser inserido as configurações do banco de dados.
+
 ```
-"Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information",
-      "Hangfire": "Information"
-    }
-  },
-"AllowedHosts": "*",
 "ConnectionStrings": {
     "CeciDatabase": "server=[NOME-SERVER-BANCO];uid=[NOME-USUARIO-BANCO];pwd=[SENHA-USUARIO-BANCO];database=[NOME-BANCO];persistsecurityinfo=True;Allow User Variables=True",
     "HangfireDb": "server=[NOME-SERVER-BANCO];uid=[NOME-USUARIO-BANCO];pwd=[SENHA-USUARIO-BANCO];database=[NOME-BANCO];persistsecurityinfo=True;Allow User Variables=True"
-  },  
+  }
+```
+**Token JWT**
+
+Deve ser criado uma chave secreta e inserido nessa seção, ela será utilizada para gerar o token jwt e validar o token enviado nas requisições de autenticação.
+
+```
 "JwtToken": {
-    "Secret": "[SECRET-KEY-JWT-TOKEN]"//Chave secreta para a geração e validação do token jwt
-  },
+    "Secret": "[SECRET-KEY-JWT-TOKEN]"
+  }
+```
+**Swagger**
+
+Nessa seção, deve ser definido as credenciais para acesso ao swagger da nossa aplicação.
+
+```
 "SwaggerSettings": {
     "SwaggerUserAuthorized": "[SWAGGER-USUARIO-AUTORIZADO]",
     "SwaggerAuthorizedPassword": "[SWAGGER-SENHA-USUARIO-AUTORIZADO]"
-  },
+  }
+```
+**Email**
+
+Nessa seção, deve ser inserido as configurações de email. Deve conter informações de uma caixa de email válida, pois essa será a caixa de email responsável para o envio de email nos fluxos contemplados por essa ação.
+
+```
 "EmailSettings": {
     "Mail": "[ENDERECO-EMAIL-PARA-ENVIO]",
     "DisplayName": "[NOME-REMETENTE]",
     "Password": "[SENHA-EMAIL]",
-    "Host": "[HOST]", //Exemplo: "smtp.office365.com"
+    "Host": "[HOST]", //Exemplos: "smtp.office365.com", "smtp.gmail.com" 
     "Port": [PORTA]
-  },
+  }
+```
+**Perfil**
+
+O valor para a chave "BasicRoleName" contida na seção "RoleSettings" deve ser o nome do perfil que será utilizado como "Básico" ou o perfil com nível mais baixo. Para o correto funcionamento da versão atual o valor para a chave está definida como "basic".
+
+```
 "RoleSettings": {
     "BasicRoleName": "basic"
-  },
+  }
+```
+**Hangfire**
+
+Nessa seção, deve ser definido as credenciais para acesso ao dashboard do hangfire, que é o serviço responsável pela execução das tarefas em background.
+
+```
 "HangfireSettings": {
     "HangfireUserAuthorized": "[HANGFIRE-USUARIO-AUTORIZADO]",
     "HangfireAuthorizedPassword": "[HANGFIRE-SENHA-USUARIO-AUTORIZADO]"
   }
 ```
-O valor para a chave "BasicRoleName" contida na seção "RoleSettings" deve ser o nome do perfil que será utilizado como "Básico" ou o perfil com nível mais baixo. Para o correto funcionamento da versão atual o valor para a chave está definida como "basic".
+**Serviços externos**
 
 Os valores para as chaves apresentadas na seção "ExternalProviders" são para utilização dos serviços do SendGrid e Firebase e os seus valores são obtidos no momento do cadastro desses serviços. Vale ressaltar que a implementação desses serviços externos estão incluídos nessa API, porém não são utilizados.
 
+```
+ "ExternalProviders": {
+    "SendGrid": {
+      "ApiKey": "[SEND-GRID-API-KEY]",
+      "SenderEmail": "[EMAIL]",
+      "SenderName": "NoReply"
+    },
+    "Firebase": {
+      "ServerApiKey": "[FIREBASE-API-KEY]",
+      "SenderId": "[FIREBASE-SENDER-ID]"
+    }
+  }
+```
 ### Build
 
 Após clonado, navegue até a raiz do projeto e execute o comando "dotnet build" para compilar o projeto e suas dependências:
@@ -254,7 +292,7 @@ O endereço da aplicação ficará disponível no console. Com a URL identificad
 https://localhost:[PORTA]/swagger
 ```
 
-As credenciais para logar e visualizar o swagger estão definidas na seção "SwaggerSettings" no arquivo appsettings.json. Essas credenciais podem ser alteradas ou até mesmo o login ser removido, o conteúdo de apoio para a implementação da funcionalidade pode ser visualizado no tópico Swagger na listagem de Referências [Restrict access to swagger](https://github.com/domaindrivendev/Swashbuckle.WebApi/issues/384).
+As credenciais para logar e visualizar o swagger estão definidas na seção "SwaggerSettings" no arquivo appsettings.json. Essas credenciais podem ser alteradas ou até mesmo o login ser removido, o conteúdo de apoio para a implementação da funcionalidade pode ser visualizado no tópico Swagger na listagem de Referências [Restrict access to swagger](https://github.com/domaindrivendev/Swashbuckle.WebApi/issues/384#issuecomment-410117400).
 
 ### Executando os testes
 
