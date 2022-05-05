@@ -205,7 +205,7 @@ namespace Ceci.WebApplication.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ResultResponse))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ResultResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
-        public async Task<ActionResult<ResultResponse<IEnumerable<UserResultDTO>>>> GetLoggedInUser ()
+        public async Task<ActionResult<ResultResponse<UserResultDTO>>> GetLoggedInUser ()
         {
             var result = await _userService.GetLoggedInUserAsync();
             return StatusCode((int)result.StatusCode, result);

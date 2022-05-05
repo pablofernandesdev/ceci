@@ -40,6 +40,7 @@ namespace Ceci.WebApplication.Dependencys
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IImportService, ImportService>();
             services.AddTransient<IValidationCodeService, ValidationCodeService>();
+            services.AddTransient<IAddressService, AddressService>();
 
             //external
             services.AddTransient<ISendGridService, SendGridService>();
@@ -55,6 +56,12 @@ namespace Ceci.WebApplication.Dependencys
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization",
                     $"key={firebaseOptionsServerId}");
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Sender", $"id={firebaseOptionsSenderId}");
+            });
+
+            services.AddHttpClient<IViaCepService, ViaCepService>(client =>
+            {
+                client.BaseAddress = new Uri(configuration["ExternalProviders:ViaCep:ApiUrl"]);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 
             return services;

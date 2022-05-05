@@ -27,6 +27,7 @@ namespace Ceci.Infra.CrossCutting.Settings
     {
         public SendGrid SendGrid { get; set; }
         public Firebase Firebase { get; set; }
+        public ViaCep ViaCep { get; set; }
     }
 
     [ExcludeFromCodeCoverage]
@@ -47,6 +48,10 @@ namespace Ceci.Infra.CrossCutting.Settings
         public string SenderId { get; set; }
     }
 
+    public class ViaCep
+    {
+        public string ApiUrl { get; set; }
+    }
 
     public class EmailSettings
     {

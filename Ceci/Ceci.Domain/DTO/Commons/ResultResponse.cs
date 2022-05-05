@@ -40,6 +40,7 @@ namespace Ceci.Domain.DTO.Commons
 
     public class ResultResponse<TData> : ResultResponse
     {
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public TData Data { get; set; }
     }
 }

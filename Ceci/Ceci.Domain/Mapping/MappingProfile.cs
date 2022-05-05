@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Ceci.Domain.DTO.Address;
 using Ceci.Domain.DTO.Auth;
 using Ceci.Domain.DTO.Role;
 using Ceci.Domain.DTO.User;
+using Ceci.Domain.DTO.ViaCep;
 using Ceci.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -61,6 +63,10 @@ namespace Ceci.Domain.Mapping
                  .ReverseMap();
 
             CreateMap<Role, RoleUpdateDTO>().ReverseMap();
+            #endregion
+
+            #region Address
+            CreateMap<ViaCepAddressResponseDTO, AddressResultDTO>().ReverseMap();
             #endregion
         }
     }

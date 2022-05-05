@@ -4,6 +4,11 @@
         <name>Ceci.Domain</name>
     </assembly>
     <members>
+        <member name="P:Ceci.Domain.DTO.Address.AddressZipCodeDTO.ZipCode">
+            <summary>
+            Zip code
+            </summary>
+        </member>
         <member name="P:Ceci.Domain.DTO.Auth.AuthResultDTO.UserId">
             <summary>
             User identifier code
