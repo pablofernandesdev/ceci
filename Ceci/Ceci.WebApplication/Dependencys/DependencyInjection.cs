@@ -23,6 +23,7 @@ namespace Ceci.WebApplication.Dependencys
             repositorys.AddTransient<IUserRepository, UserRepository>();
             repositorys.AddTransient<IRegistrationTokenRepository, RegistrationTokenRepository>();
             repositorys.AddTransient<IValidationCodeRepository, ValidationCodeRepository>();
+            repositorys.AddTransient<IAddressRepository, AddressRepository>();
             repositorys.AddTransient<IUnitOfWork, UnitOfWork>();
 
             return repositorys;
@@ -41,6 +42,7 @@ namespace Ceci.WebApplication.Dependencys
             services.AddTransient<IImportService, ImportService>();
             services.AddTransient<IValidationCodeService, ValidationCodeService>();
             services.AddTransient<IAddressService, AddressService>();
+            services.AddTransient<IRegisterService, RegisterService>();
 
             //external
             services.AddTransient<ISendGridService, SendGridService>();

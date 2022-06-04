@@ -23,5 +23,7 @@ namespace Ceci.Domain.Entities
         public ICollection<RegistrationToken> RegistrationToken { get; set; }
 
         public ICollection<ValidationCode> ValidationCode { get; set; }
+
+        public ICollection<Address> Address { get; set; }
     }
 }

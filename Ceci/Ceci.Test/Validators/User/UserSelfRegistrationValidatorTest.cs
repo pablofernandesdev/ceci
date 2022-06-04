@@ -1,4 +1,5 @@
-﻿using Ceci.Domain.DTO.User;
+﻿using Ceci.Domain.DTO.Register;
+using Ceci.Domain.DTO.User;
 using Ceci.Domain.Interfaces.Repository;
 using Ceci.Service.Validators.User;
 using Ceci.Test.Fakers.User;

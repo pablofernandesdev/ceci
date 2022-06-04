@@ -1,4 +1,5 @@
-﻿using Ceci.Domain.DTO.User;
+﻿using Ceci.Domain.DTO.Register;
+using Ceci.Domain.DTO.User;
 using FluentValidation;
 
 namespace Ceci.Service.Validators.User

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Ceci.Domain.DTO.Register;
 using Ceci.Domain.DTO.User;
 using Ceci.Domain.Entities;
 using Ceci.Domain.Interfaces.Repository;
@@ -115,7 +116,7 @@ namespace Ceci.Test.Services
             _mockEmailService.Setup(x => x.SendEmailAsync(emailRequestDTOFaker))
                 .ReturnsAsync(ResultResponseFaker.ResultResponse(HttpStatusCode.OK).Generate());
 
-            var userService = UserServiceConstrutor();
+            var userService = RegisterServiceConstrutor();
 
             //Act
             var result = await userService.SelfRegistrationAsync(UserFaker.UserSelfRegistrationDTO().Generate());
@@ -131,7 +132,7 @@ namespace Ceci.Test.Services
             _mockUnitOfWork.Setup(x => x.Role.GetBasicProfile())
                .ThrowsAsync(new Exception());
 
-            var userService = UserServiceConstrutor();
+            var userService = RegisterServiceConstrutor();
 
             //Act
             var result = await userService.SelfRegistrationAsync(UserFaker.UserSelfRegistrationDTO().Generate());
@@ -248,7 +249,7 @@ namespace Ceci.Test.Services
                 .GetFirstOrDefaultAsync(c => c.Id == Convert.ToInt32(userId)))
                 .ReturnsAsync(UserFaker.UserEntity().Generate());
 
-            var userService = UserServiceConstrutor();
+            var userService = RegisterServiceConstrutor();
 
             //Act
             var result = await userService.UpdateLoggedUserAsync(userUpdateDTOFaker);
@@ -268,7 +269,7 @@ namespace Ceci.Test.Services
                     .GetFirstOrDefaultNoTrackingAsync(c => c.Email == userUpdateDTOFaker.Email && c.Id != Convert.ToInt32(userId)))
                     .ReturnsAsync(UserFaker.UserEntity().Generate());
 
-            var userService = UserServiceConstrutor();
+            var userService = RegisterServiceConstrutor();
 
             //Act
             var result = await userService.UpdateLoggedUserAsync(userUpdateDTOFaker);
@@ -288,7 +289,7 @@ namespace Ceci.Test.Services
                     .GetFirstOrDefaultNoTrackingAsync(c => c.Email == userUpdateDTOFaker.Email && c.Id != Convert.ToInt32(userId)))
                     .ThrowsAsync(new Exception());
 
-            var userService = UserServiceConstrutor();
+            var userService = RegisterServiceConstrutor();
 
             //Act
             var result = await userService.UpdateLoggedUserAsync(userUpdateDTOFaker);
@@ -412,7 +413,7 @@ namespace Ceci.Test.Services
             _mockUnitOfWork.Setup(x => x.User.GetUserByIdAsync(Convert.ToInt32(userId)))
                 .ReturnsAsync(UserFaker.UserEntity().Generate());
 
-            var userService = UserServiceConstrutor();
+            var userService = RegisterServiceConstrutor();
 
             //Act
             var result = await userService.GetLoggedInUserAsync();
@@ -430,7 +431,7 @@ namespace Ceci.Test.Services
             _mockUnitOfWork.Setup(x => x.User.GetUserByIdAsync(Convert.ToInt32(userId)))
                 .ThrowsAsync(new Exception());
 
-            var userService = UserServiceConstrutor();
+            var userService = RegisterServiceConstrutor();
 
             //Act
             var result = await userService.GetLoggedInUserAsync();
@@ -449,7 +450,7 @@ namespace Ceci.Test.Services
             _mockUnitOfWork.Setup(x => x.User.GetFirstOrDefaultAsync(c => c.Id.Equals(Convert.ToInt32(userId))))
                 .ReturnsAsync(userEntityFaker);
 
-            var userService = UserServiceConstrutor();
+            var userService = RegisterServiceConstrutor();
 
             //Act
             var result = await userService.RedefinePasswordAsync(new UserRedefinePasswordDTO { 
@@ -471,7 +472,7 @@ namespace Ceci.Test.Services
             _mockUnitOfWork.Setup(x => x.User.GetFirstOrDefaultAsync(c => c.Id.Equals(Convert.ToInt32(userId))))
                 .ReturnsAsync(userEntityFaker);
 
-            var userService = UserServiceConstrutor();
+            var userService = RegisterServiceConstrutor();
 
             //Act
             var result = await userService.RedefinePasswordAsync(new UserRedefinePasswordDTO
@@ -493,7 +494,7 @@ namespace Ceci.Test.Services
             _mockUnitOfWork.Setup(x => x.User.GetFirstOrDefaultAsync(c => c.Id.Equals(Convert.ToInt32(userId))))
                 .ThrowsAsync(new Exception());
 
-            var userService = UserServiceConstrutor();
+            var userService = RegisterServiceConstrutor();
 
             //Act
             var result = await userService.RedefinePasswordAsync(UserFaker.UserRedefinePasswordDTO().Generate());
@@ -507,8 +508,16 @@ namespace Ceci.Test.Services
             return new UserService(_mockUnitOfWork.Object,
                 _mapper, 
                 _mockEmailService.Object, 
+                _mockBackgroundJobClient.Object);
+        }
+
+        private RegisterService RegisterServiceConstrutor()
+        {
+            return new RegisterService(_mockUnitOfWork.Object,
+                _mapper,
+                _mockHttpContextAccessor.Object,
                 _mockBackgroundJobClient.Object,
-                _mockHttpContextAccessor.Object);
+                _mockEmailService.Object);
         }
     }
 }

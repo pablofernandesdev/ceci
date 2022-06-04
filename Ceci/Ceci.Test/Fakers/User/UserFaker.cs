@@ -1,10 +1,8 @@
 ﻿using Bogus;
+using Ceci.Domain.DTO.Register;
 using Ceci.Domain.DTO.User;
 using Ceci.Infra.CrossCutting.Extensions;
 using Ceci.Infra.CrossCutting.Helper;
-using Ceci.Test.Fakers.RefreshToken;
-using Ceci.Test.Fakers.RegistrationToken;
-using Ceci.Test.Fakers.ValidationCode;
 using System.Collections.Generic;
 
 namespace Ceci.Test.Fakers.User

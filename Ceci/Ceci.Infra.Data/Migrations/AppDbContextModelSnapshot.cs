@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace Ceci.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
@@ -14,8 +16,63 @@ namespace Ceci.Infra.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.10")
+                .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("Ceci.Domain.Entities.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Complement")
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("Complement");
+
+                    b.Property<string>("District")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("District");
+
+                    b.Property<string>("Locality")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("Locality");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int")
+                        .HasColumnName("Number");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Street");
+
+                    b.Property<string>("Uf")
+                        .IsRequired()
+                        .HasColumnType("varchar(2)")
+                        .HasColumnName("Uf");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(8)")
+                        .HasColumnName("ZipCode");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Address", (string)null);
+                });
 
             modelBuilder.Entity("Ceci.Domain.Entities.RefreshToken", b =>
                 {
@@ -28,32 +85,32 @@ namespace Ceci.Infra.Data.Migrations
 
                     b.Property<string>("CreatedByIp")
                         .IsRequired()
-                        .HasColumnName("CreatedByIp")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("CreatedByIp");
 
                     b.Property<DateTime>("Expires")
-                        .HasColumnName("Expires")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("Expires");
 
                     b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("ReplacedByToken")
-                        .HasColumnName("ReplacedByToken")
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(2000)")
+                        .HasColumnName("ReplacedByToken");
 
                     b.Property<DateTime?>("Revoked")
-                        .HasColumnName("Revoked")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("Revoked");
 
                     b.Property<string>("RevokedByIp")
-                        .HasColumnName("RevokedByIp")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("RevokedByIp");
 
                     b.Property<string>("Token")
                         .IsRequired()
-                        .HasColumnName("Token")
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(2000)")
+                        .HasColumnName("Token");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -62,7 +119,7 @@ namespace Ceci.Infra.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RefreshToken");
+                    b.ToTable("RefreshToken", (string)null);
                 });
 
             modelBuilder.Entity("Ceci.Domain.Entities.RegistrationToken", b =>
@@ -75,12 +132,12 @@ namespace Ceci.Infra.Data.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Token")
                         .IsRequired()
-                        .HasColumnName("Token")
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(2000)")
+                        .HasColumnName("Token");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -89,7 +146,7 @@ namespace Ceci.Infra.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RegistrationToken");
+                    b.ToTable("RegistrationToken", (string)null);
                 });
 
             modelBuilder.Entity("Ceci.Domain.Entities.Role", b =>
@@ -103,15 +160,15 @@ namespace Ceci.Infra.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnName("Name")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Name");
 
                     b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role");
+                    b.ToTable("Role", (string)null);
                 });
 
             modelBuilder.Entity("Ceci.Domain.Entities.User", b =>
@@ -125,42 +182,42 @@ namespace Ceci.Infra.Data.Migrations
 
                     b.Property<bool>("ChangePassword")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ChangePassword")
                         .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("ChangePassword");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnName("Email")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Email");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnName("Name")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Name");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnName("Password")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Password");
 
                     b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Validated")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("Validated")
                         .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("Validated");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("Ceci.Domain.Entities.ValidationCode", b =>
@@ -174,15 +231,15 @@ namespace Ceci.Infra.Data.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnName("Code")
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(2000)")
+                        .HasColumnName("Code");
 
                     b.Property<DateTime>("Expires")
-                        .HasColumnName("Expires")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("Expires");
 
                     b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -191,7 +248,18 @@ namespace Ceci.Infra.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ValidationCode");
+                    b.ToTable("ValidationCode", (string)null);
+                });
+
+            modelBuilder.Entity("Ceci.Domain.Entities.Address", b =>
+                {
+                    b.HasOne("Ceci.Domain.Entities.User", "User")
+                        .WithMany("Address")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Ceci.Domain.Entities.RefreshToken", b =>
@@ -201,6 +269,8 @@ namespace Ceci.Infra.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Ceci.Domain.Entities.RegistrationToken", b =>
@@ -210,6 +280,8 @@ namespace Ceci.Infra.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Ceci.Domain.Entities.User", b =>
@@ -219,6 +291,8 @@ namespace Ceci.Infra.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Ceci.Domain.Entities.ValidationCode", b =>
@@ -228,6 +302,24 @@ namespace Ceci.Infra.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ceci.Domain.Entities.Role", b =>
+                {
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ceci.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Address");
+
+                    b.Navigation("RefreshToken");
+
+                    b.Navigation("RegistrationToken");
+
+                    b.Navigation("ValidationCode");
                 });
 #pragma warning restore 612, 618
         }

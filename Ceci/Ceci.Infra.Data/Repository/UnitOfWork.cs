@@ -15,13 +15,15 @@ namespace Ceci.Infra.Data.Repository
         public IRefreshTokenRepository RefreshToken { get; }
         public IRegistrationTokenRepository RegistrationToken { get; }
         public IValidationCodeRepository ValidationCode { get; }
+        public IAddressRepository Address { get; }
 
         public UnitOfWork(AppDbContext appDbContext,
             IUserRepository userRepository,
             IRoleRepository roleRepository,
             IRefreshTokenRepository refreshTokenRepository,
             IRegistrationTokenRepository registrationToken,
-            IValidationCodeRepository validationCode)
+            IValidationCodeRepository validationCode,
+            IAddressRepository address)
         {
             _appDbContext = appDbContext;
             User = userRepository;
@@ -29,6 +31,7 @@ namespace Ceci.Infra.Data.Repository
             RefreshToken = refreshTokenRepository;
             RegistrationToken = registrationToken;
             ValidationCode = validationCode;
+            Address = address;
         }
 
         public async Task CommitAsync()

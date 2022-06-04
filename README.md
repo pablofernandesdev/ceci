@@ -71,8 +71,8 @@
     - Um mapeador de objeto-objeto baseado em convenção em .NET.
 - [FluentValidation](https://fluentvalidation.net/): versão 10.4.0
     - Biblioteca de validação para .NET que usa uma interface fluente e expressões lambda para construir regras de validação fortemente tipadas.
-- [MySql.EntityFrameworkCore](https://www.nuget.org/packages/MySql.EntityFrameworkCore/): versão 6.0.4
-    - Mapeador moderno de banco de dados de objeto para .NET. Ele dá suporte a consultas LINQ, controle de alterações, atualizações e migrações de esquema em banco de dados MySql.
+- [Pomelo.EntityFrameworkCore.MySql](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql): versão 6.0.1
+    - Provedor Entity Framework Core mais popular para bancos de dados compatíveis com MySQL. Ele oferece suporte ao EF Core até sua versão mais recente e usa MySqlConnector para comunicação de servidor de banco de dados de alto desempenho.
 - [ClosedXML](https://github.com/ClosedXML/ClosedXML): versão 0.95.4
     - ClosedXML é uma biblioteca .NET para leitura, manipulação e gravação de arquivos Excel 2007+ (.xlsx, .xlsm). Ele visa fornecer uma interface intuitiva e amigável para lidar com a API OpenXML subjacente.
 	

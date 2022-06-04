@@ -11,6 +11,8 @@ namespace Ceci.Domain.DTO.Commons
 
         public string Details { get; set; }
 
+        public bool IsSuccessStatusCode => (int)StatusCode >= 200 && (int)StatusCode <= 299;
+
         private Exception _exception { get; set; }
 
         [JsonIgnore]

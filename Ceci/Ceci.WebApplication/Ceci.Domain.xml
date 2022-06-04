@@ -4,6 +4,21 @@
         <name>Ceci.Domain</name>
     </assembly>
     <members>
+        <member name="T:Ceci.Domain.DTO.Address.AddressDeleteDTO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ceci.Domain.DTO.Address.AddressDeleteDTO.AddressId">
+            <summary>
+            Identifier address
+            </summary>
+        </member>
+        <member name="P:Ceci.Domain.DTO.Address.AddressIdentifierDTO.AddressId">
+            <summary>
+            Identifier address
+            </summary>
+        </member>
         <member name="P:Ceci.Domain.DTO.Address.AddressZipCodeDTO.ZipCode">
             <summary>
             Zip code
@@ -87,6 +102,46 @@
         <member name="P:Ceci.Domain.DTO.Notification.NotificationSendDTO.Body">
             <summary>
             Notification body
+            </summary>
+        </member>
+        <member name="P:Ceci.Domain.DTO.Register.UserLoggedUpdateDTO.Name">
+            <summary>
+            Name user
+            </summary>
+        </member>
+        <member name="P:Ceci.Domain.DTO.Register.UserLoggedUpdateDTO.Email">
+            <summary>
+            Email user
+            </summary>
+        </member>
+        <member name="P:Ceci.Domain.DTO.Register.UserRedefinePasswordDTO.CurrentPassword">
+            <summary>
+            Current password user
+            </summary>
+        </member>
+        <member name="P:Ceci.Domain.DTO.Register.UserRedefinePasswordDTO.NewPassword">
+            <summary>
+            New password user
+            </summary>
+        </member>
+        <member name="T:Ceci.Domain.DTO.Register.UserSelfRegistrationDTO">
+            <summary>
+            User self registration DTO
+            </summary>
+        </member>
+        <member name="P:Ceci.Domain.DTO.Register.UserSelfRegistrationDTO.Name">
+            <summary>
+            Name user
+            </summary>
+        </member>
+        <member name="P:Ceci.Domain.DTO.Register.UserSelfRegistrationDTO.Email">
+            <summary>
+            Email user
+            </summary>
+        </member>
+        <member name="P:Ceci.Domain.DTO.Register.UserSelfRegistrationDTO.Password">
+            <summary>
+            Password user
             </summary>
         </member>
         <member name="T:Ceci.Domain.DTO.Role.IdentifierRoleDTO">
@@ -234,26 +289,6 @@
             Identifier role
             </summary>
         </member>
-        <member name="P:Ceci.Domain.DTO.User.UserLoggedUpdateDTO.Name">
-            <summary>
-            Name user
-            </summary>
-        </member>
-        <member name="P:Ceci.Domain.DTO.User.UserLoggedUpdateDTO.Email">
-            <summary>
-            Email user
-            </summary>
-        </member>
-        <member name="P:Ceci.Domain.DTO.User.UserRedefinePasswordDTO.CurrentPassword">
-            <summary>
-            Current password user
-            </summary>
-        </member>
-        <member name="P:Ceci.Domain.DTO.User.UserRedefinePasswordDTO.NewPassword">
-            <summary>
-            New password user
-            </summary>
-        </member>
         <member name="P:Ceci.Domain.DTO.User.UserResultDTO.UserId">
             <summary>
             User identifier
@@ -277,26 +312,6 @@
         <member name="P:Ceci.Domain.DTO.User.UserResultDTO.Role">
             <summary>
             Role user
-            </summary>
-        </member>
-        <member name="T:Ceci.Domain.DTO.User.UserSelfRegistrationDTO">
-            <summary>
-            User self registration DTO
-            </summary>
-        </member>
-        <member name="P:Ceci.Domain.DTO.User.UserSelfRegistrationDTO.Name">
-            <summary>
-            Name user
-            </summary>
-        </member>
-        <member name="P:Ceci.Domain.DTO.User.UserSelfRegistrationDTO.Email">
-            <summary>
-            Email user
-            </summary>
-        </member>
-        <member name="P:Ceci.Domain.DTO.User.UserSelfRegistrationDTO.Password">
-            <summary>
-            Password user
             </summary>
         </member>
         <member name="T:Ceci.Domain.DTO.User.UserUpdateDTO">

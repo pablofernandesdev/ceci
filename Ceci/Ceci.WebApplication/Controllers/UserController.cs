@@ -56,30 +56,6 @@ namespace Ceci.WebApplication.Controllers
         }
 
         /// <summary>
-        /// User self registration
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>Success when creating a new user</returns>
-        /// <response code="200">Returns success when creating a new item</response>
-        /// <response code="400">Returns error if the request fails</response>
-        /// <response code="401">Not authorized</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="500">Internal server error</response>   
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("self-registration")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
-        public async Task<ActionResult<ResultResponse>> SelfRegistration([FromBody] UserSelfRegistrationDTO model)
-        {
-            var result = await _userService.SelfRegistrationAsync(model);
-            return StatusCode((int)result.StatusCode, result);
-        }
-
-        /// <summary>
         /// Update user
         /// </summary>
         /// <param name="model"></param>
@@ -98,30 +74,6 @@ namespace Ceci.WebApplication.Controllers
         public async Task<ActionResult<ResultResponse>> Update([FromBody] UserUpdateDTO model)
         {
             var result = await _userService.UpdateAsync(model);
-            return StatusCode((int)result.StatusCode, result);
-        }
-
-        /// <summary>
-        /// Update user logged
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>Success when updating user logged</returns>
-        /// <response code="200">Returns success when updating user logged</response>
-        /// <response code="400">Returns error if the request fails</response>
-        /// <response code="401">Not authorized</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="500">Internal server error</response>   
-        [Authorize(Policy = "Basic")]
-        [HttpPut]
-        [Route("logged-user")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
-        public async Task<ActionResult<ResultResponse>> UpdateLoggedInUser([FromBody] UserLoggedUpdateDTO model)
-        {
-            var result = await _userService.UpdateLoggedUserAsync(model);
             return StatusCode((int)result.StatusCode, result);
         }
 
@@ -191,27 +143,6 @@ namespace Ceci.WebApplication.Controllers
         }
 
         /// <summary>
-        /// Get logged in user
-        /// </summary>
-        /// <returns>Success when get logged in user</returns>
-        /// <response code="200">Returns success when get logged in user</response>
-        /// <response code="401">Not authorized</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="500">Internal server error</response>   
-        [Authorize(Policy = "Basic")]
-        [HttpGet]
-        [Route("logged-user")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResultResponse<UserResultDTO>))]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
-        public async Task<ActionResult<ResultResponse<UserResultDTO>>> GetLoggedInUser ()
-        {
-            var result = await _userService.GetLoggedInUserAsync();
-            return StatusCode((int)result.StatusCode, result);
-        }
-
-        /// <summary>
         /// Get user by id
         /// </summary>
         /// <returns>Success when get user by id</returns>
@@ -228,30 +159,6 @@ namespace Ceci.WebApplication.Controllers
         public async Task<ActionResult<ResultResponse<UserResultDTO>>> GetById([FromRoute] UserIdentifierDTO model)
         {
             var result = await _userService.GetByIdAsync(model.UserId);
-            return StatusCode((int)result.StatusCode, result);
-        }
-
-        /// <summary>
-        /// Redefine user password
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>Success when redefine user password</returns>
-        /// <response code="200">Returns success when redefine user password</response>
-        /// <response code="400">Returns error if the request fails</response>
-        /// <response code="401">Not authorized</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="500">Internal server error</response>   
-        [Authorize(Policy = "Basic")]
-        [HttpPost]
-        [Route("redefine-password")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ResultResponse))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
-        public async Task<ActionResult<ResultResponse>> RedefinePassword([FromBody] UserRedefinePasswordDTO model)
-        {
-            var result = await _userService.RedefinePasswordAsync(model);
             return StatusCode((int)result.StatusCode, result);
         }
 

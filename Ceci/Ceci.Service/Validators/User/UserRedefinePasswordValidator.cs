@@ -1,4 +1,4 @@
-﻿using Ceci.Domain.DTO.User;
+﻿using Ceci.Domain.DTO.Register;
 using Ceci.Infra.CrossCutting.Helper;
 using FluentValidation;
 

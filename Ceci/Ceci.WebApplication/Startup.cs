@@ -53,7 +53,11 @@ namespace Ceci.WebApplication
         {
             //dotnet ef migrations add InitialMigration --project Ceci.Infra.Data --startup-project Ceci.WebApplication
             //dotnet ef database update --project Ceci.Infra.Data --startup-project Ceci.WebApplication
-            services.AddDbContext<AppDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("CeciDatabase")));
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                var connectionString = Configuration.GetConnectionString("CeciDatabase");
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            });
 
             services.AddCors();
 

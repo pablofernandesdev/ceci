@@ -10,6 +10,7 @@ namespace Ceci.Domain.Interfaces.Repository
         IRefreshTokenRepository RefreshToken { get; }
         IRegistrationTokenRepository RegistrationToken { get; }
         IValidationCodeRepository ValidationCode { get; }
+        IAddressRepository Address { get; }
         Task CommitAsync();
     }
 }
