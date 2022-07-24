@@ -4,22 +4,25 @@ namespace Ceci.Domain.DTO.Address
 {
     public class AddressResultDTO
     {
-        [JsonProperty("cep")]
-        public string Cep { get; set; }
+        [JsonProperty("zipCode")]
+        public string ZipCode { get; set; }
 
-        [JsonProperty("logradouro")]
-        public string Logradouro { get; set; }
+        [JsonProperty("street")]
+        public string Street { get; set; }
 
-        [JsonProperty("bairro")]
-        public string Bairro { get; set; }
+        [JsonProperty("district")]
+        public string District { get; set; }
 
-        [JsonProperty("localidade")]
-        public string Localidade { get; set; }
+        [JsonProperty("locality")]
+        public string Locality { get; set; }
 
         [JsonProperty("uf")]
         public string Uf { get; set; }
 
-        [JsonProperty("ddd")]
-        public string Ddd { get; set; }
+        [JsonProperty("complement")]
+        public string Complement { get; set; }
+
+        [JsonProperty("number")]
+        public string Number { get; set; }
     }
 }

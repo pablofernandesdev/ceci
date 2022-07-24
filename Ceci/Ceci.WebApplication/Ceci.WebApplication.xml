@@ -74,11 +74,11 @@
         </member>
         <member name="M:Ceci.WebApplication.Controllers.AddressController.GetById(Ceci.Domain.DTO.Address.AddressIdentifierDTO)">
             <summary>
-            Get role by id
+            Get address by id
             </summary>
             <param name="model"></param>
-            <returns>Success when get role by id</returns>
-            <response code="200">Returns success when get role by id</response>
+            <returns>Success when get address by id</returns>
+            <response code="200">Returns success when get address by id</response>
             <response code="401">Not authorized</response>
             <response code="403">Forbidden</response>
             <response code="500">Internal server error</response>   
@@ -167,7 +167,7 @@
             <summary>
             
             </summary>
-            <param name="userService"></param>
+            <param name="registerService"></param>
         </member>
         <member name="M:Ceci.WebApplication.Controllers.RegisterController.SelfRegistration(Ceci.Domain.DTO.Register.UserSelfRegistrationDTO)">
             <summary>

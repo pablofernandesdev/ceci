@@ -17,6 +17,6 @@ namespace Ceci.Domain.Interfaces.Service
         Task<ResultResponse> UpdateLoggedUserAddressAsync(AddressLoggedUserUpdateDTO obj);
         Task<ResultResponse> InactivateLoggedUserAddressAsync(AddressDeleteDTO obj);
         Task<ResultDataResponse<IEnumerable<AddressResultDTO>>> GetLoggedUserAddressesAsync(AddressFilterDTO filter);
-        Task<ResultResponse<AddressResultDTO>> GetLoggedUserAddressAsync(int addressId);
+        Task<ResultResponse<AddressResultDTO>> GetLoggedUserAddressAsync(AddressIdentifierDTO obj);
     }
 }

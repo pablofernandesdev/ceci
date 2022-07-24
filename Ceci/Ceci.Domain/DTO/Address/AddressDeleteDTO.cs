@@ -2,9 +2,6 @@
 
 namespace Ceci.Domain.DTO.Address
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class AddressDeleteDTO
     {
         /// <summary>

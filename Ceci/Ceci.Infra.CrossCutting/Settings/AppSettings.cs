@@ -48,6 +48,7 @@ namespace Ceci.Infra.CrossCutting.Settings
         public string SenderId { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class ViaCep
     {
         public string ApiUrl { get; set; }

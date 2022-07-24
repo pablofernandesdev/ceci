@@ -1,13 +1,8 @@
 ﻿using Ceci.Domain.DTO.User;
 using Ceci.Domain.Interfaces.Repository;
 using Ceci.Service.Validators.User;
-using Ceci.Test.Fakers.Role;
-using Ceci.Test.Fakers.User;
 using FluentValidation.TestHelper;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Ceci.Test.Validators.User

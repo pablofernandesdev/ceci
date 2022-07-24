@@ -17,13 +17,11 @@ namespace Ceci.Test.Controllers
     {
         private readonly Mock<IUserService> _mockUserService;
         private readonly Mock<IImportService> _mockImportService;
-        private readonly Mock<IRegisterService> _mockRegisterService;
 
         public UserControllerTest()
         {
             _mockUserService = new Moq.Mock<IUserService>();
             _mockImportService = new Mock<IImportService>();    
-            _mockRegisterService = new Mock<IRegisterService>();
         }
 
         [Fact]
@@ -153,90 +151,6 @@ namespace Ceci.Test.Controllers
         }
 
         [Fact]
-        public async Task Redefine_password()
-        {
-            //Arrange
-            var redefinePasswordDto = UserFaker.UserRedefinePasswordDTO().Generate();
-            var resultResponse = ResultResponseFaker.ResultResponse(It.IsAny<HttpStatusCode>());
-
-            _mockRegisterService.Setup(x => x.RedefinePasswordAsync(redefinePasswordDto))
-                .ReturnsAsync(resultResponse);
-
-            var userController = RegisterControllerConstrutor();
-
-            //Act
-            var result = await userController.RedefinePassword(redefinePasswordDto);
-            _mockRegisterService.Verify(x => x.RedefinePasswordAsync(redefinePasswordDto), Times.Once);
-
-            //Assert
-            var objResult = Assert.IsType<ObjectResult>(result.Result);
-            Assert.IsType<ResultResponse>(objResult.Value);
-        }
-
-        [Fact]
-        public async Task Self_registration_user()
-        {
-            //Arrange
-            var userSelfRegistrationDto = UserFaker.UserSelfRegistrationDTO().Generate();
-            var resultResponse = ResultResponseFaker.ResultResponse(It.IsAny<HttpStatusCode>());
-
-            _mockRegisterService.Setup(x => x.SelfRegistrationAsync(userSelfRegistrationDto))
-                .ReturnsAsync(resultResponse);
-
-            var userController = RegisterControllerConstrutor();
-
-            //Act
-            var result = await userController.SelfRegistration(userSelfRegistrationDto);
-            _mockRegisterService.Verify(x => x.SelfRegistrationAsync(userSelfRegistrationDto), Times.Once);
-
-            //Assert
-            var objResult = Assert.IsType<ObjectResult>(result.Result);
-            Assert.IsType<ResultResponse>(objResult.Value);
-        }
-
-        [Fact]
-        public async Task Update_logged_in_user()
-        {
-            //Arrange
-            var userLoggedUpdateDTO = UserFaker.UserLoggedUpdateDTO().Generate();
-            var resultResponse = ResultResponseFaker.ResultResponse(It.IsAny<HttpStatusCode>());
-
-            _mockRegisterService.Setup(x => x.UpdateLoggedUserAsync(userLoggedUpdateDTO))
-                .ReturnsAsync(resultResponse);
-
-            var userController = RegisterControllerConstrutor();
-
-            //Act
-            var result = await userController.UpdateLoggedInUser(userLoggedUpdateDTO);
-            _mockRegisterService.Verify(x => x.UpdateLoggedUserAsync(userLoggedUpdateDTO), Times.Once);
-
-            //Assert
-            var objResult = Assert.IsType<ObjectResult>(result.Result);
-            Assert.IsType<ResultResponse>(objResult.Value);
-        }
-
-        [Fact]
-        public async Task Get_logged_in_user()
-        {
-            //Arrange
-            var userResultDTO = UserFaker.UserResultDTO().Generate();
-            var resultResponse = ResultResponseFaker.ResultResponseData(userResultDTO, It.IsAny<HttpStatusCode>());
-
-            _mockRegisterService.Setup(x => x.GetLoggedInUserAsync())
-                .ReturnsAsync(resultResponse);
-
-            var userController = RegisterControllerConstrutor();
-
-            //Act
-            var result = await userController.GetLoggedInUser();
-            _mockRegisterService.Verify(x => x.GetLoggedInUserAsync(), Times.Once);
-
-            //Assert
-            var objResult = Assert.IsType<ObjectResult>(result.Result);
-            Assert.IsType<ResultResponse<UserResultDTO>>(objResult.Value);
-        }
-
-        [Fact]
         public async Task Import_users()
         {
             //Arrange
@@ -261,11 +175,6 @@ namespace Ceci.Test.Controllers
         {
             return new UserController(_mockUserService.Object,
                 _mockImportService.Object);
-        }
-
-        private RegisterController RegisterControllerConstrutor()
-        {
-            return new RegisterController(_mockRegisterService.Object);
         }
     }
 }

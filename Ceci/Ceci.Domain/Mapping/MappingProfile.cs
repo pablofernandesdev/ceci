@@ -67,9 +67,21 @@ namespace Ceci.Domain.Mapping
             #endregion
 
             #region Address
-            CreateMap<ViaCepAddressResponseDTO, AddressResultDTO>().ReverseMap();
+            CreateMap<ViaCepAddressResponseDTO, AddressResultDTO>()
+                .ForMember(dest => dest.ZipCode, opt => opt.MapFrom(src => src.Cep))
+                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Logradouro))
+                .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.Bairro))
+                .ForMember(dest => dest.Locality, opt => opt.MapFrom(src => src.Localidade))
+                .ForMember(dest => dest.Complement, opt => opt.MapFrom(src => src.Complemento))
+            .ReverseMap();
 
             CreateMap<Address, AddressLoggedUserAddDTO>().ReverseMap();
+
+            CreateMap<Address, AddressAddDTO>().ReverseMap();
+
+            CreateMap<Address, AddressUpdateDTO>().ReverseMap();
+
+            CreateMap<Address, AddressResultDTO>().ReverseMap();
 
             CreateMap<Address, AddressLoggedUserUpdateDTO>()
                 .ForMember(dest => dest.AddressId, opt => opt.MapFrom(src => src.Id))

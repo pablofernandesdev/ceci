@@ -9,7 +9,7 @@ namespace Ceci.Test.Fakers.User
 {
     public static class UserFaker
     {
-        public static Faker<Ceci.Domain.Entities.User> UserEntity() 
+        public static Faker<Ceci.Domain.Entities.User> UserEntity()
         {
             return new Faker<Ceci.Domain.Entities.User>()
                 .CustomInstantiator(p => new Ceci.Domain.Entities.User
@@ -32,14 +32,16 @@ namespace Ceci.Test.Fakers.User
                     RegistrationDate = p.Date.Recent(),
                     RegistrationToken = new List<Ceci.Domain.Entities.RegistrationToken>(),
                     Validated = p.Random.Bool(),
-                    ValidationCode = new List<Ceci.Domain.Entities.ValidationCode>()
+                    ValidationCode = new List<Ceci.Domain.Entities.ValidationCode>(),
+                    Address = new List<Domain.Entities.Address>()                   
                 });
         }
 
         public static Faker<UserAddDTO> UserAddDTO()
         {
             return new Faker<UserAddDTO>()
-                .CustomInstantiator(p => new UserAddDTO{ 
+                .CustomInstantiator(p => new UserAddDTO
+                {
                     Name = p.Person.FullName,
                     Email = p.Person.Email,
                     Password = StringHelper.Base64Encode(p.Random.Word()),

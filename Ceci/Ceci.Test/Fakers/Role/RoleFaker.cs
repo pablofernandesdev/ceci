@@ -1,8 +1,7 @@
 ﻿using Bogus;
 using Ceci.Domain.DTO.Role;
-using System;
+using Ceci.Test.Fakers.User;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Ceci.Test.Fakers.Role
 {
@@ -17,7 +16,7 @@ namespace Ceci.Test.Fakers.Role
                     Id = p.Random.Int(1, 2),
                     Name = p.Random.Word(),
                     RegistrationDate = p.Date.Recent(),
-                    User = new List<Domain.Entities.User>()
+                    User = new List<Ceci.Domain.Entities.User>()                   
                 });
         }
 

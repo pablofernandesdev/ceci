@@ -46,7 +46,7 @@ namespace Ceci.Service.Services
             {
                 var fileName = Path.GetFileName(Guid.NewGuid().ToString() + model.File.FileName);
                 //var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\UploadFiles", fileName);
-                var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.Replace("bin\\Debug\\net5.0", string.Empty)), 
+                var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.Replace("bin\\Debug\\net6.0", string.Empty)), 
                     @"wwwroot\UploadFiles", 
                     fileName);
 
@@ -115,7 +115,7 @@ namespace Ceci.Service.Services
         private static string ConvertWithClosedXml(string atualFile)
         {
             //var newFile = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\UploadFiles", Guid.NewGuid().ToString() + ".xlsx");
-            var newFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.Replace("bin\\Debug\\net5.0", string.Empty)),
+            var newFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.Replace("bin\\Debug\\net6.0", string.Empty)),
                 @"wwwroot\UploadFiles",
                 Guid.NewGuid().ToString() + ".xlsx");
 

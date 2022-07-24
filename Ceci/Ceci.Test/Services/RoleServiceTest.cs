@@ -7,6 +7,7 @@ using Ceci.Service.Services;
 using Ceci.Test.Fakers.Role;
 using Moq;
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Xunit;
@@ -215,7 +216,7 @@ namespace Ceci.Test.Services
             var result = await roleService.GetAsync();
 
             //Assert
-            Assert.NotNull(result.Data);
+            Assert.True(result.Data.Any() && result.StatusCode.Equals(HttpStatusCode.OK));
         }
 
         [Fact]

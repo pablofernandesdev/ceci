@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <Folder Include="Fakers\Token\" />
-    <Folder Include="wwwroot\UploadFiles\" />
   </ItemGroup>
 
 </Project>

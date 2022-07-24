@@ -4,11 +4,6 @@
         <name>Ceci.Domain</name>
     </assembly>
     <members>
-        <member name="T:Ceci.Domain.DTO.Address.AddressDeleteDTO">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="P:Ceci.Domain.DTO.Address.AddressDeleteDTO.AddressId">
             <summary>
             Identifier address

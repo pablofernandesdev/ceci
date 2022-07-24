@@ -15,6 +15,7 @@ using Hangfire;
 using Microsoft.AspNetCore.Http;
 using Moq;
 using System;
+using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -116,10 +117,10 @@ namespace Ceci.Test.Services
             _mockEmailService.Setup(x => x.SendEmailAsync(emailRequestDTOFaker))
                 .ReturnsAsync(ResultResponseFaker.ResultResponse(HttpStatusCode.OK).Generate());
 
-            var userService = RegisterServiceConstrutor();
+            var registerService = RegisterServiceConstrutor();
 
             //Act
-            var result = await userService.SelfRegistrationAsync(UserFaker.UserSelfRegistrationDTO().Generate());
+            var result = await registerService.SelfRegistrationAsync(UserFaker.UserSelfRegistrationDTO().Generate());
 
             //Assert
             Assert.True(result.StatusCode.Equals(HttpStatusCode.OK));
@@ -132,10 +133,10 @@ namespace Ceci.Test.Services
             _mockUnitOfWork.Setup(x => x.Role.GetBasicProfile())
                .ThrowsAsync(new Exception());
 
-            var userService = RegisterServiceConstrutor();
+            var registerService = RegisterServiceConstrutor();
 
             //Act
-            var result = await userService.SelfRegistrationAsync(UserFaker.UserSelfRegistrationDTO().Generate());
+            var result = await registerService.SelfRegistrationAsync(UserFaker.UserSelfRegistrationDTO().Generate());
 
             //Assert
             Assert.True(result.StatusCode.Equals(HttpStatusCode.InternalServerError));
@@ -148,7 +149,7 @@ namespace Ceci.Test.Services
             var userEntityFaker = UserFaker.UserEntity().Generate(3);
             var userFilterDto = UserFaker.UserFilterDTO().Generate();
 
-            _mockUnitOfWork.Setup(x => x.User.GetAllAsync())
+            _mockUnitOfWork.Setup(x => x.User.GetByFilterAsync(userFilterDto))
                 .ReturnsAsync(userEntityFaker);
 
             var userService = UserServiceConstrutor();
@@ -157,7 +158,7 @@ namespace Ceci.Test.Services
             var result = await userService.GetAsync(userFilterDto);
 
             //Assert
-            Assert.True(result.StatusCode.Equals(HttpStatusCode.OK));
+            Assert.True(result.Data.Any() && result.StatusCode.Equals(HttpStatusCode.OK));
         }
 
         [Fact]
@@ -269,10 +270,10 @@ namespace Ceci.Test.Services
                     .GetFirstOrDefaultNoTrackingAsync(c => c.Email == userUpdateDTOFaker.Email && c.Id != Convert.ToInt32(userId)))
                     .ReturnsAsync(UserFaker.UserEntity().Generate());
 
-            var userService = RegisterServiceConstrutor();
+            var registerService = RegisterServiceConstrutor();
 
             //Act
-            var result = await userService.UpdateLoggedUserAsync(userUpdateDTOFaker);
+            var result = await registerService.UpdateLoggedUserAsync(userUpdateDTOFaker);
 
             //Assert
             Assert.True(result.StatusCode.Equals(HttpStatusCode.BadRequest));
@@ -289,10 +290,10 @@ namespace Ceci.Test.Services
                     .GetFirstOrDefaultNoTrackingAsync(c => c.Email == userUpdateDTOFaker.Email && c.Id != Convert.ToInt32(userId)))
                     .ThrowsAsync(new Exception());
 
-            var userService = RegisterServiceConstrutor();
+            var registerService = RegisterServiceConstrutor();
 
             //Act
-            var result = await userService.UpdateLoggedUserAsync(userUpdateDTOFaker);
+            var result = await registerService.UpdateLoggedUserAsync(userUpdateDTOFaker);
 
             //Assert
             Assert.True(result.StatusCode.Equals(HttpStatusCode.InternalServerError));
@@ -385,7 +386,7 @@ namespace Ceci.Test.Services
             var result = await userService.GetByIdAsync(It.IsAny<int>());
 
             //Assert
-            Assert.True(result.StatusCode.Equals(HttpStatusCode.OK));
+            Assert.True(result.Data != null && result.StatusCode.Equals(HttpStatusCode.OK));
         }
 
         [Fact]
@@ -413,13 +414,13 @@ namespace Ceci.Test.Services
             _mockUnitOfWork.Setup(x => x.User.GetUserByIdAsync(Convert.ToInt32(userId)))
                 .ReturnsAsync(UserFaker.UserEntity().Generate());
 
-            var userService = RegisterServiceConstrutor();
+            var registerService = RegisterServiceConstrutor();
 
             //Act
-            var result = await userService.GetLoggedInUserAsync();
+            var result = await registerService.GetLoggedInUserAsync();
 
             //Assert
-            Assert.True(result.StatusCode.Equals(HttpStatusCode.OK));
+            Assert.True(result.Data != null && result.StatusCode.Equals(HttpStatusCode.OK));
         }
 
         [Fact]
@@ -431,10 +432,10 @@ namespace Ceci.Test.Services
             _mockUnitOfWork.Setup(x => x.User.GetUserByIdAsync(Convert.ToInt32(userId)))
                 .ThrowsAsync(new Exception());
 
-            var userService = RegisterServiceConstrutor();
+            var registerService = RegisterServiceConstrutor();
 
             //Act
-            var result = await userService.GetLoggedInUserAsync();
+            var result = await registerService.GetLoggedInUserAsync();
 
             //Assert
             Assert.True(result.StatusCode.Equals(HttpStatusCode.InternalServerError));
@@ -450,10 +451,10 @@ namespace Ceci.Test.Services
             _mockUnitOfWork.Setup(x => x.User.GetFirstOrDefaultAsync(c => c.Id.Equals(Convert.ToInt32(userId))))
                 .ReturnsAsync(userEntityFaker);
 
-            var userService = RegisterServiceConstrutor();
+            var registerService = RegisterServiceConstrutor();
 
             //Act
-            var result = await userService.RedefinePasswordAsync(new UserRedefinePasswordDTO { 
+            var result = await registerService.RedefinePasswordAsync(new UserRedefinePasswordDTO { 
                 CurrentPassword = PasswordExtension.DecryptPassword(userEntityFaker.Password),
                 NewPassword = "dGVzdGUy"
             });
@@ -472,10 +473,10 @@ namespace Ceci.Test.Services
             _mockUnitOfWork.Setup(x => x.User.GetFirstOrDefaultAsync(c => c.Id.Equals(Convert.ToInt32(userId))))
                 .ReturnsAsync(userEntityFaker);
 
-            var userService = RegisterServiceConstrutor();
+            var registerService = RegisterServiceConstrutor();
 
             //Act
-            var result = await userService.RedefinePasswordAsync(new UserRedefinePasswordDTO
+            var result = await registerService.RedefinePasswordAsync(new UserRedefinePasswordDTO
             {
                 CurrentPassword = "xxxxxx",
                 NewPassword = "dGVzdGUy"
@@ -494,10 +495,10 @@ namespace Ceci.Test.Services
             _mockUnitOfWork.Setup(x => x.User.GetFirstOrDefaultAsync(c => c.Id.Equals(Convert.ToInt32(userId))))
                 .ThrowsAsync(new Exception());
 
-            var userService = RegisterServiceConstrutor();
+            var registerService = RegisterServiceConstrutor();
 
             //Act
-            var result = await userService.RedefinePasswordAsync(UserFaker.UserRedefinePasswordDTO().Generate());
+            var result = await registerService.RedefinePasswordAsync(UserFaker.UserRedefinePasswordDTO().Generate());
 
             //Assert
             Assert.True(result.StatusCode.Equals(HttpStatusCode.InternalServerError));

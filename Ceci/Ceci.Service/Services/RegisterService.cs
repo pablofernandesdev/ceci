@@ -282,7 +282,7 @@ namespace Ceci.Service.Services
             return response;
         }
 
-        public async Task<ResultResponse<AddressResultDTO>> GetLoggedUserAddressAsync(int addressId)
+        public async Task<ResultResponse<AddressResultDTO>> GetLoggedUserAddressAsync(AddressIdentifierDTO obj)
         {
             var response = new ResultResponse<AddressResultDTO>();
 
@@ -291,7 +291,7 @@ namespace Ceci.Service.Services
                 var userId = _httpContextAccessor.HttpContext.User.GetLoggedInUserId();
 
                 var address = await _uow.Address.GetFirstOrDefaultNoTrackingAsync(x => x.UserId == Convert.ToInt32(userId)
-                        && x.Id == addressId);
+                        && x.Id == obj.AddressId);
 
                 if (address == null)
                 {

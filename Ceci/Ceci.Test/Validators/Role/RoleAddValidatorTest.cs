@@ -2,9 +2,6 @@
 using Ceci.Service.Validators.Role;
 using Ceci.Test.Fakers.Role;
 using FluentValidation.TestHelper;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Ceci.Test.Validators.Role

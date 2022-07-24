@@ -19,15 +19,15 @@ namespace Ceci.WebApplication.Controllers
     [Authorize(Policy = "Basic")]
     public class RegisterController : ControllerBase
     {
-        private readonly IRegisterService _userService;
+        private readonly IRegisterService _registerService;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="userService"></param>
-        public RegisterController(IRegisterService userService)
+        /// <param name="registerService"></param>
+        public RegisterController(IRegisterService registerService)
         {
-            _userService = userService;
+            _registerService = registerService;
         }
 
 
@@ -51,7 +51,7 @@ namespace Ceci.WebApplication.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
         public async Task<ActionResult<ResultResponse>> SelfRegistration([FromBody] UserSelfRegistrationDTO model)
         {
-            var result = await _userService.SelfRegistrationAsync(model);
+            var result = await _registerService.SelfRegistrationAsync(model);
             return StatusCode((int)result.StatusCode, result);
         }
 
@@ -74,7 +74,7 @@ namespace Ceci.WebApplication.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
         public async Task<ActionResult<ResultResponse>> UpdateLoggedInUser([FromBody] UserLoggedUpdateDTO model)
         {
-            var result = await _userService.UpdateLoggedUserAsync(model);
+            var result = await _registerService.UpdateLoggedUserAsync(model);
             return StatusCode((int)result.StatusCode, result);
         }
 
@@ -94,7 +94,7 @@ namespace Ceci.WebApplication.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
         public async Task<ActionResult<ResultResponse<UserResultDTO>>> GetLoggedInUser()
         {
-            var result = await _userService.GetLoggedInUserAsync();
+            var result = await _registerService.GetLoggedInUserAsync();
             return StatusCode((int)result.StatusCode, result);
         }
 
@@ -117,7 +117,7 @@ namespace Ceci.WebApplication.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
         public async Task<ActionResult<ResultResponse>> RedefinePassword([FromBody] UserRedefinePasswordDTO model)
         {
-            var result = await _userService.RedefinePasswordAsync(model);
+            var result = await _registerService.RedefinePasswordAsync(model);
             return StatusCode((int)result.StatusCode, result);
         }
 
@@ -140,7 +140,7 @@ namespace Ceci.WebApplication.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
         public async Task<ActionResult<ResultResponse>> AddLoggedInUserAddressAsync([FromBody] AddressLoggedUserAddDTO model)
         {
-            var result = await _userService.AddLoggedUserAddressAsync(model);
+            var result = await _registerService.AddLoggedUserAddressAsync(model);
             return StatusCode((int)result.StatusCode, result);
         }
 
@@ -163,7 +163,7 @@ namespace Ceci.WebApplication.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
         public async Task<ActionResult<ResultResponse>> UpdateLoggedInUserAddress([FromBody] UserLoggedUpdateDTO model)
         {
-            var result = await _userService.UpdateLoggedUserAsync(model);
+            var result = await _registerService.UpdateLoggedUserAsync(model);
             return StatusCode((int)result.StatusCode, result);
         }
 
@@ -186,7 +186,7 @@ namespace Ceci.WebApplication.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
         public async Task<ActionResult<ResultResponse>> DeleteLoggedInUserAddress([FromRoute] AddressDeleteDTO model)
         {
-            var result = await _userService.InactivateLoggedUserAddressAsync(model);
+            var result = await _registerService.InactivateLoggedUserAddressAsync(model);
             return StatusCode((int)result.StatusCode, result);
         }
 
@@ -207,7 +207,7 @@ namespace Ceci.WebApplication.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
         public async Task<ActionResult<ResultDataResponse<IEnumerable<AddressResultDTO>>>> GetLoggedInUserAddresss([FromRoute] AddressFilterDTO model)
         {
-            var result = await _userService.GetLoggedUserAddressesAsync(model);
+            var result = await _registerService.GetLoggedUserAddressesAsync(model);
             return StatusCode((int)result.StatusCode, result);
         }
 
@@ -228,7 +228,7 @@ namespace Ceci.WebApplication.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResultResponse))]
         public async Task<ActionResult<ResultResponse<AddressResultDTO>>> GetLoggedInUserAddress([FromRoute] AddressIdentifierDTO model)
         {
-            var result = await _userService.GetLoggedUserAddressAsync(model.AddressId);
+            var result = await _registerService.GetLoggedUserAddressAsync(model);
             return StatusCode((int)result.StatusCode, result);
         }
     }

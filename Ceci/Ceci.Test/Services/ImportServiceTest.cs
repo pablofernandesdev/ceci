@@ -86,7 +86,6 @@ namespace Ceci.Test.Services
                 File = file
             };
 
-
             _mockUnitOfWork.Setup(x => x.Role.GetBasicProfile())
                 .ReturnsAsync(RoleFaker.RoleEntity().Generate());
 

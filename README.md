@@ -24,6 +24,8 @@
     - Autenticação de usuários por login e senha
 - Usuário
     - Armazemamento persistente de usuários (criar, ler, atualizar e excluir)
+- Endereço
+    - Armazemamento persistente de endereços (criar, ler, atualizar e excluir)
 - Perfil
     - Armazemamento persistente de perfil (criar, ler, atualizar e excluir)
 - Relatórios
@@ -46,6 +48,8 @@
 :dart: Manter perfis de usuários 
 
 :dart: Vincular perfis a usuários 
+
+:dart: Vincular endereços a usuários 
 
 :dart: Execução de serviço em background (envio de emails e importação de relatórios)
 

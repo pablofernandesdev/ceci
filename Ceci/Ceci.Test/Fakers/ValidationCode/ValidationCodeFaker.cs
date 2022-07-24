@@ -18,7 +18,7 @@ namespace Ceci.Test.Fakers.ValidationCode
                     Expires = p.Date.Future(),
                     Id = p.Random.Int(),
                     RegistrationDate = p.Date.Recent(),
-                    User = UserFaker.UserEntity().Generate()
+                    User = UserFaker.UserEntity().Generate()               
                 });
         }
 

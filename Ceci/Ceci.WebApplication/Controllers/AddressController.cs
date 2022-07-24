@@ -36,7 +36,7 @@ namespace Ceci.WebApplication.Controllers
         /// <response code="200">Returns success when get address</response>
         /// <response code="400">Bad request</response>
         /// <response code="500">Internal server error</response>   
-        [Authorize(Policy = "Basic")]
+        //[Authorize(Policy = "Basic")]
         [HttpGet]
         [Route("zip-code/{zipCode}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResultResponse<AddressResultDTO>))]
@@ -139,11 +139,11 @@ namespace Ceci.WebApplication.Controllers
         }
 
         /// <summary>
-        /// Get role by id
+        /// Get address by id
         /// </summary>
         /// <param name="model"></param>
-        /// <returns>Success when get role by id</returns>
-        /// <response code="200">Returns success when get role by id</response>
+        /// <returns>Success when get address by id</returns>
+        /// <response code="200">Returns success when get address by id</response>
         /// <response code="401">Not authorized</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal server error</response>   

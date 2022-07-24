@@ -1,9 +1,6 @@
 ﻿using Ceci.Domain.DTO.User;
 using Ceci.Domain.Interfaces.Repository;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Ceci.Service.Validators.User
